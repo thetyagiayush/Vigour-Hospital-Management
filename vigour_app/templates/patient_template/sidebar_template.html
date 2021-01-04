@@ -1,0 +1,98 @@
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color:black">
+    <a href="/" class="brand-link">
+    <center>
+      <img src="{% static 'images/footer.png'%}" width="180"/><br></center>
+    </a>
+
+    <div class="sidebar">
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{% static "dist/img/vigour-sampledp.png" %}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a class="d-block">Hola! {{ user.first_name }} {{ user.last_name }}</a>
+        </div>
+      </div>
+
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+          <li class="nav-item">
+            {% url 'patient_home' as patient_home %}
+            <a href="{{ patient_home }}" class="nav-link {% if request.path == patient_home %} active {% endif %}">
+              <i class="nav-icon fas fa-home"></i>
+              <p>
+                Home
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {% url 'patient_home' as patient_home %}
+            <a href="{% url 'patient_profile' %}" class="nav-link">
+              <i class="nav-icon fa fa-pencil"></i>
+              <p>
+                Edit Profile
+              </p>
+            </a>
+          </li>
+           <li class="nav-item">
+            {% url 'patient_appointment' as patient_appointment %}
+            <a href="{{ patient_appointment }}" class="nav-link {% if request.path == patient_appointment %} active {% endif %}">
+              <i class="nav-icon fas fa-calendar"></i>
+              <p>
+                Add Appointment
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {% url 'patient_appointment_history' as patient_appointment_history %}
+            <a href="{{ patient_appointment_history }}" class="nav-link {% if request.path == patient_appointment_history %} active {% endif %}">
+              <i class="nav-icon fas fa-history"></i>
+              <p>
+                Appointment History
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {% url 'patient_view_bed' as patient_view_bed %}
+            <a href="{{ patient_view_bed }}" class="nav-link {% if request.path == patient_view_bed %} active {% endif %}">
+              <i class="nav-icon fas fa-bed"></i>
+              <p>
+                Check Beds Availablity
+              </p>
+            </a>
+          </li>
+           <li class="nav-item">
+            {% url 'patient_feedback' as patient_feedback %}
+            <a href="{{ patient_feedback }}" class="nav-link {% if request.path == patient_feedback %} active {% endif %}">
+              <i class="nav-icon fas fa-comments"></i>
+              <p>
+                Feedback Message
+              </p>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            {% url 'patient_all_notification' as patient_all_notification %}
+            <a href="{{ patient_all_notification }}" class="nav-link {% if request.path == patient_all_notification %} active {% endif %}">
+              <i class="nav-icon fas fa-bell"></i>
+              <p>
+                Notifications
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">
+              <i class="nav-icon fa fa-sign-out"></i>
+              <p>
+                Logout
+              </p>
+            </a>
+          </li>
+
+        </ul>
+      </nav>
+    </div>
+  </aside>

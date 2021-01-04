@@ -1,0 +1,64 @@
+{% extends 'hod_template/base_template.html' %}
+{% block page_title %}
+Patients Who Applied For Appointment
+{% endblock page_title %}
+{% block main_content %}
+
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-md-12">
+         
+            <div class="card card-primary">
+              <div class="card-header" style="background-color:black">
+                <h3 class="card-title">Patients Leave Log</h3>
+              </div>
+
+             
+                <div class="table">
+                    <table class="table">
+                        <tr>
+                            <th>ID</th>
+                            <th>Patient ID</th>
+                            <th>Patient Name</th>
+                            <th>Date</th>
+                            <th>Information</th>
+                            <th>Applied On</th>
+                            <th>Action</th>
+                        </tr>
+                        {% for leave in leaves %}
+                        <tr>
+                            <td>{{ leave.id }}</td>
+                            <td>{{ leave.patient_id.admin.id }}</td>
+                            <td>{{ leave.patient_id.admin.first_name }} {{ leave.patient_id.admin.last_name }}</td>
+                            <td>{{ leave.leave_date }}</td>
+                            <td>{{ leave.leave_message }}</td>
+                            <td>{{ leave.created_at }}</td>
+                            <td>
+                                {% if leave.leave_status == 0 %}
+                                <a href="{% url 'patient_approve_appointment' leave_id=leave.id %}" class="btn btn-success" >Approve</a>
+                                <a class="btn btn-danger" href="{% url 'patient_disapprove_appointment' leave_id=leave.id %}" >Disapprove</a>
+                                {% elif leave.leave_status == 1  %}
+                                 <button class="btn btn-warning" disabled="disabled" data-toggle="modal" data-target="#reply_modal">Approved</button>
+                                {% else %}
+                                <button class="btn btn-danger" disabled="disabled" data-toggle="modal" data-target="#reply_modal">Disapproved</button>
+                                {% endif %}
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+
+            </div>
+           
+
+
+
+          </div>
+          </div>
+      </div>
+    </section>
+
+  
+{% endblock main_content %}

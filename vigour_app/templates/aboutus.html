@@ -1,0 +1,123 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Vigour | One Stop Wellness</title>
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+
+	
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/util.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+<body>
+
+<div class="header">
+<div class="container">
+        <div class="navbar">
+                <div class="logo">
+                    <a href="/">
+                    <img src="{% static 'images/One Stop Wellness.png'%}" width="200px"></a>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="{% static 'aboutus.html'%}">HOME</a></li>
+<li><a href="{% static 'aboutus.html'%}">ABOUT</a></li>
+<li><a href="contact">CONTACT</a></li>
+                    </ul>
+                </nav>
+                
+                {% if user.is_authenticated %}
+<div class="dropdown">
+  <a class="btn3" style="color:white"><i class="fa fa-user" style="color:white"></i>&nbsp;    Hello {{ user.first_name }} </a>
+  <div class="dropdown-content">
+  {% ifequal user.user_type "1" %}
+        <a href="/admin_home"><i class="fa fa-user"></i>&nbsp;My Dashboard</a>
+  {% endifequal %}
+  {% ifequal user.user_type "2" %}
+        <a href="/doctor_home"><i class="fa fa-user"></i>&nbsp;My Dashboard</a>
+  {% endifequal %}      
+  {% ifequal user.user_type "3" %}        
+        <a href="/patient_home"><i class="fa fa-user"></i>&nbsp;My Dashboard</a>
+  {% endifequal %} 
+  {% ifequal user.user_type "4" %}        
+        <a href="/hospital_home"><i class="fa fa-user"></i>&nbsp;My Dashboard</a>
+  {% endifequal %} 
+    <a href="/logout_user"><i class="fa fa-sign-out"></i>&nbsp;Log Out</a>
+  </div>
+</div>
+                {% else %}
+                <a href="/login" class="btn">LOG IN/SIGN UP &#8594</a>
+                {% endif %}
+        </div>
+                
+         
+
+</div>
+</div>
+
+<div class="bg-contact100" style="color:white">
+
+		<div class="container-contact100" >
+    
+			<div class="wrap-contact100">
+  
+				<div class="contact100-pic js-tilt" data-tilt>
+					<a href="/"> <img  src="{% static 'images/first.png' %}" alt="IMG"></a>
+				</div>
+       
+
+				
+					<span class="contact100-form-title">
+          <br/><br/>
+						About Vigour <br/> <p>
+          Vigour means strength and that explains it all. Vigour is a health-tech
+project which would give its user the strength to stay healthy and safe
+without wasting much time in commuting and searching for doctors, vacant
+beds and medicines.
+</p>
+           
+					</span>
+           
+			
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+	<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js'%}"></script>
+
+	<script src="{% static 'vendor/bootstrap/js/popper.js'%}"></script>
+	<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js'%}"></script>
+
+	<script src="{% static 'vendor/select2/select2.min.js'%}"></script>
+
+	<script src="{% static 'vendor/tilt/tilt.jquery.min.js'%}"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+
+	<script src="js/main.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+<!-----------foooter---------->
+{% include 'footer.html' %}

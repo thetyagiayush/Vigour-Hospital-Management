@@ -1,0 +1,58 @@
+{% extends 'patient_template/base_template.html' %}
+{% block page_title %}
+Add A New Appointment
+{% endblock page_title %}
+{% block main_content %}
+    <section class="content">
+      <div class="container-fluid">
+                    <div class="row">
+              <div class="col-md-12">
+            <div class="card card-primary">
+              <div class="card-header" style="background-color:black">
+                <h3 class="card-title" >Add Appointment</h3>
+              </div>
+               <form action="{% url 'patient_appointment_save' %}" method="post">
+                <div class="card-body">
+
+                   <div class="form-group">
+                    <label>Appointment Date </label>
+                       {% csrf_token %}
+                    <input type="date" name="leave_date" class="form-control" placeholder="Leave Date">
+                  </div>
+                  <div class="form-group">
+                  <label>Doctor Preference </label>
+                  <select class="form-control" name="doctor_pref">
+                  {% for doctor in doctors %}
+                          <option value={{ doctor.admin.username }}>{{ doctor.admin.first_name }} {{doctor.admin.last_name}}</option>
+                  {% endfor %}
+                    </select>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label>Information</label>
+                    <textarea class="form-control" rows="6" name="leave_msg"></textarea>
+                  </div>
+                   <div class="form-group">
+                      {% if messages %}
+                        {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                        <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+                        {% endif %}
+                        {% if message.tags == 'success' %}
+                        <div class="alert alert-success" style="margin-top:10px">Applied For Appointment</div>
+                        {% endif %}
+                        {% endfor %}
+                      {% endif %}
+                    </div>
+
+                </div>
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary btn-block" style="background-color:black" id="fetch_patient">Add Appointment</button>
+                </div>
+               </form>
+            </div>
+          </div>
+          </div>
+      </div>
+    </section>
+{% endblock main_content %}

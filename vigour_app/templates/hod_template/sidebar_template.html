@@ -1,0 +1,128 @@
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color:black">
+    <a href="/" class="brand-link">
+    <center>
+      <img src="{% static 'images/footer.png'%}" width="180"/><br></center>
+    </a>
+
+   <div class="sidebar">
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{% static "dist/img/vigour-sampledp.png" %}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a class="d-block">Hola! {{ user.first_name }} {{ user.last_name }}</a>
+        </div>
+      </div>
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-item">
+            {% url 'admin_home' as admin_home %}
+            <a href="{{ admin_home }}" class="nav-link {% if request.path == admin_home %} active {% endif %}">
+              <i class="nav-icon fas fa-home"></i>
+              <p>
+                Home
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {% url 'admin_home' as admin_home %}
+            <a href="{% url 'admin_profile' %}" class="nav-link">
+              <i class="nav-icon fa fa-pencil"></i>
+              <p>
+                Edit Profile
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {% url 'add_doctor' as add_doctor %}
+            <a href="{{ add_doctor }}" class="nav-link {% if request.path == add_doctor %} active {% endif %}">
+              <i class="nav-icon fas fa-user-md"></i>
+              <p>
+                Add Doctor
+              </p>
+            </a>
+          </li>
+           <li class="nav-item">
+              {% url 'manage_doctor' as manage_doctor %}
+            {% url 'edit_doctor' doctor_id=id as edit_doctor %}
+            <a href="{% url 'manage_doctor' %}" class="nav-link {% if request.path == manage_doctor %} active {% endif %} {% if request.path == edit_doctor %} active {% endif %}">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Manage Doctors
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+              {% url 'add_patient' as add_patient %}
+            <a href="{% url 'add_patient' %}" class="nav-link {% if request.path == add_patient %} active {% endif %}">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Add Patient
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+              {% url 'manage_patient' as manage_patient %}
+              {% url 'edit_patient' patient_id=id as edit_patient %}
+            <a href="{% url 'manage_patient' %}" class="nav-link {% if request.path == manage_patient %} active {% endif %} {% if request.path == edit_patient %} active {% endif %}">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Manage Patients
+              </p>
+            </a>
+          </li>
+          
+
+           
+           <li class="nav-item">
+               {% url 'patient_appointment_view' as patient_appointment_view %}
+            <a href="{% url 'patient_appointment_view' %}" class="nav-link {% if request.path == patient_appointment_view %} active {% endif %}">
+              <i class="nav-icon fas fa-calendar-check-o"></i>
+              <p>
+                Patient Appointments
+              </p>
+            </a>
+          </li>
+            <li class="nav-item">
+                 {% url 'doctor_leave_view' as doctor_leave_view %}
+            <a href="{% url 'doctor_leave_view' %}" class="nav-link {% if request.path == doctor_leave_view %} active {% endif %}">
+              <i class="nav-icon fas fa-calendar-o"></i>
+              <p>
+                Doctor Leave
+              </p>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            {% url 'manage_all_notifications' as manage_all_notifications %}
+             <a href="{% url 'manage_all_notifications' %}" class="nav-link {% if request.path == manage_all_notifications %} active {% endif %}">
+              <i class="nav-icon fas fa-bell"></i>
+              <p>
+                Manage All Notifications
+              </p>
+            </a>
+          </li>
+          </li>
+          <li class="nav-item">
+             {% url 'manage_all_feedback' as manage_all_feedback %}
+            <a href="{% url 'manage_all_feedback' %}" class="nav-link {% if request.path == manage_all_feedback  %} active {% endif %}">
+              <i class="nav-icon fas fa-comments"></i>
+              <p>
+                Manage All Feedbacks
+              </p>
+            </a>
+          </li>
+<li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">
+              <i class="nav-icon fa fa-sign-out"></i>
+              <p>
+                Logout
+              </p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </aside>

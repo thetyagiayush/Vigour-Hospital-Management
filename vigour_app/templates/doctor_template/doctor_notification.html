@@ -1,0 +1,118 @@
+{% extends 'doctor_template/base_template.html' %}
+{% block page_title %}
+Manage Patient Notifications
+{% endblock page_title %}
+{% block main_content %}
+    <section class="content">
+      <div class="container-fluid">
+           <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Patients</h3>
+
+                <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>User Name</th>
+                      <th>Email</th>
+                      <th>Appointment Date</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for patient in mypatients %}
+                    
+                          <tr>
+                            <td>{{ patient.patient_id.admin.id }}</td>
+                            <td>{{ patient.patient_id.admin.first_name }}</td>
+                            <td>{{ patient.patient_id.admin.last_name }}</td>
+                            <td>{{ patient.patient_id.admin.username }}</td>
+                            <td>{{ patient.patient_id.admin.email }}</td>
+                            <td>{{ patient.patient_id.updated_at }}</td>
+                            <td><a href="#" class="btn btn-success show_notification" data-toggle="modal" data-target="#myModal">Send Notification</a></td>
+                          </tr>
+                          
+                  {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Send Notification to <span id="name_span"></span></h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <input type="text" name="message" class="form-control" id="message_not">
+             <input type="hidden" name="patient_id" class="form-control" id="patient_id">
+          </div>
+          <div class="form-group">
+            <button class="btn btn-info btn-block send_notification_btn" type="button">Send Notification</button>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+{% endblock main_content %}
+{% block custom_js %}
+<script>
+  $(".show_notification").click(function(){
+      var patient_id=$(this).parents("tr").children("td:eq(0)").text();
+      var patient_name=$(this).parents("tr").children("td:eq(3)").text();
+      console.log(patient_id);
+      $("#patient_id").val(patient_id);
+      $("#name_span").text(patient_name);
+
+  });
+
+  $(".send_notification_btn").click(function(){
+      var id=$("#patient_id").val();
+      var message=$("#message_not").val();
+      sendNotification(id,message);
+  });
+
+  function sendNotification(id,message){
+           $.ajax({
+            url:'{% url 'send_patient_notification' %}',
+            type:'POST',
+            data:{id:id,message:message},
+        })
+        .done(function(response){
+            if(response=="True"){
+                alert("Message Sent");
+            }
+            else{
+                alert("Failed to Send Message");
+            }
+        });
+  }
+</script>
+{% endblock custom_js %}

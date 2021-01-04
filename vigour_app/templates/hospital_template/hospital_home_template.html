@@ -1,0 +1,59 @@
+{% extends 'hospital_template/base_template.html' %}
+{% block page_title %}
+Home
+{% endblock page_title %}
+{% block main_content %}
+    <section class="content">
+      <div class="container-fluid">
+            
+          <div class="row">
+
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3>{{ hospi.max_bed }}</h3>
+
+                <p>Total Beds</p>
+              </div>
+              <div class="icon">
+                <i class="fa fa-bed"></i>
+              </div>
+              <a href="{% url 'hospital_bed' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>{{ hospi.available_bed }}</h3>
+
+                <p>Avaialable Beds</p>
+              </div>
+              <div class="icon">
+                <i class="fa fa-bed"></i>
+              </div>
+              <a href="{% url 'hospital_bed' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3>{{ noti }}</h3>
+
+                <p>New Notifications</p>
+              </div>
+              <div class="icon">
+                <i class="fa fa-bell"></i>
+              </div>
+              <a href="{% url 'hospital_all_notification' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+        </div>
+          
+    </section>
+{% endblock main_content %}
+{% block custom_js %}
+
+<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-messaging.js"></script>
+
+{% endblock custom_js %}

@@ -1,0 +1,61 @@
+{% extends 'doctor_template/base_template.html' %}
+{% block page_title %}
+Doctor Notifications
+{% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+
+
+           <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">All Notifications</h3>
+
+                <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <tr>
+                        <th> </th>
+                            <th>Notification</th>
+                            <th>Action</th>
+                        </tr>
+                  {% for notification in notifications %}
+                    <tr>
+                        <td> </td>
+                            <td>{{ notification.message }}</td>
+                            <td>
+                                {% if notification.read_status == 0 %}
+                                <a href="{% url 'doctor_read_notification' notification_id=notification.id %}" class="btn btn-success" >Mark As Read</a>
+                                {% else  %}
+                                 <button class="btn btn-warning" disabled="disabled" data-toggle="modal" data-target="#reply_modal">Marked As Read</button>
+                                {% endif %}
+                            </td>
+
+                        </tr>
+                  {% endfor %}
+                  
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}
+
